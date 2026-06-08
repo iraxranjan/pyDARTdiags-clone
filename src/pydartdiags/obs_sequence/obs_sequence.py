@@ -1263,7 +1263,7 @@ def _load_yaml_to_dict(file_path):
         raise
 
 
-def _convert_dart_time(seconds, days):
+def _convert_from_dart_time(seconds, days):
     """covert from seconds, days after 1601 to datetime object
 
     Note:
@@ -1273,6 +1273,10 @@ def _convert_dart_time(seconds, days):
     time = dt.datetime(1601, 1, 1) + dt.timedelta(days=days, seconds=seconds)
     return time
 
+def convert_to_dart_time(time: dt.datetime):
+    """Converts datetime object to a list of seconds, days after 1601"""
+    dart_time = time - dt.datetime(1601, 1, 1)
+    return [dart_time.seconds, dart_time.days]
 
 def _construct_composit(df_comp, composite, components, raise_on_duplicate):
     """
